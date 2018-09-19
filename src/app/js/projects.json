@@ -1,0 +1,694 @@
+[
+    {
+    ratings: {
+    like: {
+    average: null,
+    counts: {
+                    1: {
+    total: 0,
+    users: []
+                    }
+                }
+            }
+        },
+    sharefile_vault_url: null,
+    last_event_on: "2018-09-18 13:17:10",
+    rights: [
+            "add_file",
+            "view",
+            "rate",
+            "delete",
+            "add_conversation",
+            "comment",
+            "update",
+            "add_task",
+            "grant",
+            "subscribe"
+        ],
+    app_item_id: 2,
+    fields: [
+            {
+    type: "text",
+    field_id: 177213482,
+    label: "Title",
+    values: [
+                    {
+    value: "Test Proj2"
+                    }
+                ],
+    config: {
+    settings: {
+    format: "plain",
+    size: "small"
+                    },
+    mapping: null,
+    label: "Title"
+                },
+    external_id: "title"
+            },
+            {
+    type: "number",
+    field_id: 177332921,
+    label: "Tage",
+    values: [
+                    {
+    value: "12.0000"
+                    }
+                ],
+    config: {
+    settings: {
+    decimals: 0
+                    },
+    mapping: null,
+    label: "Tage"
+                },
+    external_id: "tage"
+            },
+            {
+    type: "number",
+    field_id: 177332922,
+    label: "Spätester Start",
+    values: [
+                    {
+    value: "90.0000"
+                    }
+                ],
+    config: {
+    settings: {
+    decimals: 0
+                    },
+    mapping: null,
+    label: "Spätester Start"
+                },
+    external_id: "spatester-start"
+            },
+            {
+    type: "date",
+    field_id: 177213483,
+    label: "Deadline",
+    values: [
+                    {
+    start: "2018-10-02 10:00:00",
+    start_date_utc: "2018-10-02",
+    start_time_utc: "08:00:00",
+    start_time: "10:00:00",
+    start_utc: "2018-10-02 08:00:00",
+    start_date: "2018-10-02"
+                    }
+                ],
+    config: {
+    settings: {
+    color: "DCEBD8",
+    calendar: true,
+    end: "disabled",
+    time: "enabled"
+                    },
+    mapping: null,
+    label: "Deadline"
+                },
+    external_id: "deadline"
+            },
+            {
+    type: "contact",
+    field_id: 177213484,
+    label: "Responsible",
+    values: [
+                    {
+    value: {
+    user_id: 4684083,
+    space_id: null,
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                            },
+    profile_id: 195207798,
+    org_id: null,
+    phone: [
+                                "+4917639556192"
+                            ],
+    link: "https://podio.com/users/4684083",
+    avatar: 696978166,
+    mail: [
+                                "svillyfly@mail.ru"
+                            ],
+    external_id: null,
+    last_seen_on: "2018-09-19 08:56:59",
+    name: "Elizaveta Ragozina"
+                        }
+                    }
+                ],
+    config: {
+    settings: {
+    type: "space_users",
+    valid_types: [
+                            "user"
+                        ]
+                    },
+    mapping: null,
+    label: "Responsible"
+                },
+    external_id: "responsible"
+            },
+            {
+    type: "category",
+    field_id: 177213485,
+    label: "Status",
+    values: [
+                    {
+    value: {
+    status: "active",
+    text: "Entered",
+    id: 1,
+    color: "FFD5C2"
+                        }
+                    }
+                ],
+    config: {
+    settings: {
+    multiple: false,
+    options: [
+                            {
+    status: "active",
+    text: "Entered",
+    id: 1,
+    color: "FFD5C2"
+                            },
+                            {
+    status: "active",
+    text: "In progress",
+    id: 2,
+    color: "F7F0C5"
+                            },
+                            {
+    status: "active",
+    text: "Complete",
+    id: 3,
+    color: "DCEBD8"
+                            }
+                        ],
+    display: "inline"
+                    },
+    mapping: null,
+    label: "Status"
+                },
+    external_id: "status"
+            }
+        ],
+    title: "Test Proj2",
+    initial_revision: {
+    item_revision_id: 2833550274,
+    created_via: {
+    url: null,
+    auth_client_id: 1,
+    display: false,
+    name: "Podio",
+    id: 1
+            },
+    created_by: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    created_on: "2018-09-18 13:17:10",
+    user: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    type: "creation",
+    revision: 0
+        },
+    created_via: {
+    url: null,
+    auth_client_id: 1,
+    display: false,
+    name: "Podio",
+    id: 1
+        },
+    created_by: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+            },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+        },
+    current_revision: {
+    item_revision_id: 2833550274,
+    created_via: {
+    url: null,
+    auth_client_id: 1,
+    display: false,
+    name: "Podio",
+    id: 1
+            },
+    created_by: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    created_on: "2018-09-18 13:17:10",
+    user: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    type: "creation",
+    revision: 0
+        },
+    priority: 937381875,
+    comment_count: 0,
+    file_count: 0,
+    created_on: "2018-09-18 13:17:10",
+    item_id: 937381875,
+    link: "https://podio.com/student-ironhack/project-management/apps/projects/items/2",
+    sharefile_vault_folder_id: null,
+    revision: 0,
+    external_id: null,
+    app_item_id_formatted: "2"
+    },
+    {
+    ratings: {
+    like: {
+    average: null,
+    counts: {
+                    1: {
+    total: 0,
+    users: []
+                    }
+                }
+            }
+        },
+    sharefile_vault_url: null,
+    last_event_on: "2018-09-18 13:16:07",
+    rights: [
+            "add_file",
+            "view",
+            "rate",
+            "delete",
+            "add_conversation",
+            "comment",
+            "update",
+            "add_task",
+            "grant",
+            "subscribe"
+        ],
+    app_item_id: 1,
+    fields: [
+            {
+    type: "text",
+    field_id: 177213482,
+    label: "Title",
+    values: [
+                    {
+    value: "Test Proj"
+                    }
+                ],
+    config: {
+    settings: {
+    format: "plain",
+    size: "small"
+                    },
+    mapping: null,
+    label: "Title"
+                },
+    external_id: "title"
+            },
+            {
+    type: "number",
+    field_id: 177332921,
+    label: "Tage",
+    values: [
+                    {
+    value: "10.0000"
+                    }
+                ],
+    config: {
+    settings: {
+    decimals: 0
+                    },
+    mapping: null,
+    label: "Tage"
+                },
+    external_id: "tage"
+            },
+            {
+    type: "number",
+    field_id: 177332922,
+    label: "Spätester Start",
+    values: [
+                    {
+    value: "90.0000"
+                    }
+                ],
+    config: {
+    settings: {
+    decimals: 0
+                    },
+    mapping: null,
+    label: "Spätester Start"
+                },
+    external_id: "spatester-start"
+            },
+            {
+    type: "date",
+    field_id: 177213483,
+    label: "Deadline",
+    values: [
+                    {
+    start: "2018-09-30 10:00:00",
+    start_date_utc: "2018-09-30",
+    start_time_utc: "08:00:00",
+    start_time: "10:00:00",
+    start_utc: "2018-09-30 08:00:00",
+    start_date: "2018-09-30"
+                    }
+                ],
+    config: {
+    settings: {
+    color: "DCEBD8",
+    calendar: true,
+    end: "disabled",
+    time: "enabled"
+                    },
+    mapping: null,
+    label: "Deadline"
+                },
+    external_id: "deadline"
+            },
+            {
+    type: "contact",
+    field_id: 177213484,
+    label: "Responsible",
+    values: [
+                    {
+    value: {
+    user_id: 4684083,
+    space_id: null,
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                            },
+    profile_id: 195207798,
+    org_id: null,
+    phone: [
+                                "+4917639556192"
+                            ],
+    link: "https://podio.com/users/4684083",
+    avatar: 696978166,
+    mail: [
+                                "svillyfly@mail.ru"
+                            ],
+    external_id: null,
+    last_seen_on: "2018-09-19 08:56:59",
+    name: "Elizaveta Ragozina"
+                        }
+                    }
+                ],
+    config: {
+    settings: {
+    type: "space_users",
+    valid_types: [
+                            "user"
+                        ]
+                    },
+    mapping: null,
+    label: "Responsible"
+                },
+    external_id: "responsible"
+            },
+            {
+    type: "category",
+    field_id: 177213485,
+    label: "Status",
+    values: [
+                    {
+    value: {
+    status: "active",
+    text: "Entered",
+    id: 1,
+    color: "FFD5C2"
+                        }
+                    }
+                ],
+    config: {
+    settings: {
+    multiple: false,
+    options: [
+                            {
+    status: "active",
+    text: "Entered",
+    id: 1,
+    color: "FFD5C2"
+                            },
+                            {
+    status: "active",
+    text: "In progress",
+    id: 2,
+    color: "F7F0C5"
+                            },
+                            {
+    status: "active",
+    text: "Complete",
+    id: 3,
+    color: "DCEBD8"
+                            }
+                        ],
+    display: "inline"
+                    },
+    mapping: null,
+    label: "Status"
+                },
+    external_id: "status"
+            }
+        ],
+    title: "Test Proj",
+    initial_revision: {
+    item_revision_id: 2827499993,
+    created_via: {
+    url: null,
+    auth_client_id: 1,
+    display: false,
+    name: "Podio",
+    id: 1
+            },
+    created_by: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    created_on: "2018-09-16 14:21:40",
+    user: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    type: "creation",
+    revision: 0
+        },
+    created_via: {
+    url: null,
+    auth_client_id: 1,
+    display: false,
+    name: "Podio",
+    id: 1
+        },
+    created_by: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+            },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+        },
+    current_revision: {
+    item_revision_id: 2833547406,
+    created_via: {
+    url: null,
+    auth_client_id: 1,
+    display: false,
+    name: "Podio",
+    id: 1
+            },
+    created_by: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    created_on: "2018-09-18 13:16:07",
+    user: {
+    user_id: 4684083,
+    name: "Elizaveta Ragozina",
+    url: "https://podio.com/users/4684083",
+    type: "user",
+    image: {
+    hosted_by: "podio",
+    hosted_by_humanized_name: "Podio",
+    thumbnail_link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    link: "https://d2cmuesa4snpwn.cloudfront.net/public/696978166",
+    file_id: 696978166,
+    external_file_id: null,
+    link_target: "_blank"
+                },
+    avatar_type: "file",
+    avatar: 696978166,
+    id: 4684083,
+    avatar_id: 696978166,
+    last_seen_on: "2018-09-19 08:56:59"
+            },
+    type: "update",
+    revision: 2
+        },
+    priority: 935835953,
+    comment_count: 0,
+    file_count: 0,
+    created_on: "2018-09-16 14:21:40",
+    item_id: 935835953,
+    link: "https://podio.com/student-ironhack/project-management/apps/projects/items/1",
+    sharefile_vault_folder_id: null,
+    revision: 2,
+    external_id: null,
+    app_item_id_formatted: "1"
+    }
+]
