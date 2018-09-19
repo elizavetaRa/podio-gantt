@@ -1,28 +1,21 @@
 import React from 'react';
-import projects from "./projects.json";
-import TimeLine from "react-gantt-timeline";
+import { Link } from 'react-router-dom';
 
-const UserApps = () => {
+const UserApps = props => {
 
-    
-// tranforming data to format for the TimeLine    
-const data = projects.map(proj=>{
+    const apps = props.apps
 
-    return ({
-       id: proj.item_id,
-       start: new Date(),
-       end:  new Date(proj.fields[3].values[0].start),
-       name: proj.fields[0].values[0].value
-
+    const mappedApps = apps.map(app => {
+        return (
+            <li key={app.app_id}>
+                <Link to={`/app/${app.app_id}`}>{app.config.name}</Link>
+                </li>
+        )
     })
-})
 
-
-console.log(data)
-      
     return (
         <div>
-            <TimeLine data={data} mode={"month"}/>
+            <ul>{mappedApps}</ul>
         </div>
     );
 };
