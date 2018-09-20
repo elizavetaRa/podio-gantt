@@ -8,7 +8,7 @@ const UserApps = props => {
     const mappedApps = apps.map(app => {
         return (
             <li key={app.app_id}>
-                <Link to={`/app/${app.app_id}`}>{app.config.name}</Link>
+                <Link to={`/app/${app.app_id}/items`}>{app.config.name}</Link>
                 </li>
         )
     })

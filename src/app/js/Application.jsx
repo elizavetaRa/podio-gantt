@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 
 import Auth from './Auth'
@@ -11,6 +11,7 @@ import NotFound from './NotFound'
 import api from './utils/api'
 
 import UserApps from "./UserApps"
+import AppGantt from "./AppGantt"
 
 class Application extends React.Component {
     constructor(props) {
@@ -19,39 +20,81 @@ class Application extends React.Component {
         this.state = {
             user: this._setUser(true),
             userName: undefined,
-            apps: []
+            apps: [],
+            authUrl: "",
+            loggedin: false
         }
 
         this._setUser = this._setUser.bind(this)
         this._resetUser = this._resetUser.bind(this)
     }
 
-    componentDidMount() {
-        console.log("App loaded")
-        axios.get('/user').then(user => {
-            this.setState({
-                userName: user.data.profile.name
+    componentWillMount() {
+
+        if (!this.state.loggedin) {
+            api.get('/api').then(data => {
+
+                if (data.authUrl) {
+                    this.setState({
+                        authUrl: data.authUrl
+                    })
+
+                } else {
+                    this.setState({
+                        loggedin: data.loggedin
+                    })
+                }
+
+                console.log("Loggedin: ", this.state.loggedin)
             })
-        }).then(()=>{
-            axios.get("/apps").then(apps=>{
-                console.log(apps.data)
+        }
+    }
+
+
+    componentDidMount() {
+
+        api.get('/api/user').then(user => {
+
+            this.setState({
+                userName: user.profile.name
+            })
+        }).then(() => {
+
+            api.get("/api/apps").then(apps => {
+                console.log(apps)
                 this.setState({
-                    apps: apps.data
+                    apps: apps
                 })
             })
         })
+
     }
 
     render() {
-        return (
-            <BrowserRouter>
-                <div className="container">
-                    <h1>Hello {this.state.userName}!</h1>
-                    <h2>See your apps:</h2>
-                    <UserApps apps={this.state.apps}/>
-                </div>
-            </BrowserRouter>
-        )
+
+        if (!this.state.loggedin) {
+            return (
+                <BrowserRouter>
+                    <div className="container">
+                        <a href={this.state.authUrl}>Authentication in Podio</a>
+                    </div>
+                </BrowserRouter>
+            )
+        } else {
+            return (
+                <BrowserRouter>
+                    <div className="container">
+                        <h1>Hello {this.state.userName}!</h1>
+                        <h2>See your apps:</h2>
+                        <UserApps apps={this.state.apps} />
+                        <Route path="/app/:id/items" render={()=>{
+                            return <AppGantt/>
+                        }}/>
+                    </div>
+                </BrowserRouter>
+            )
+
+        }
     }
 
     _resetUser() {
