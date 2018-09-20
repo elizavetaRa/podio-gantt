@@ -10,8 +10,8 @@ import Profile from './Profile'
 import NotFound from './NotFound'
 import api from './utils/api'
 
-import UserApps from "./UserApps"
-import AppGantt from "./AppGantt"
+import UserApps from './UserApps'
+import AppGantt from './AppGantt'
 
 class Application extends React.Component {
     constructor(props) {
@@ -21,8 +21,8 @@ class Application extends React.Component {
             user: this._setUser(true),
             userName: undefined,
             apps: [],
-            authUrl: "",
-            loggedin: false
+            authUrl: '',
+            loggedin: false,
         }
 
         this._setUser = this._setUser.bind(this)
@@ -30,48 +30,48 @@ class Application extends React.Component {
     }
 
     componentWillMount() {
-
         if (!this.state.loggedin) {
-            api.get('/api').then(data => {
-
+            api.get(`/api${window.location.search}`).then(data => {
                 if (data.authUrl) {
                     this.setState({
-                        authUrl: data.authUrl
+                        authUrl: data.authUrl,
                     })
-
                 } else {
                     this.setState({
-                        loggedin: data.loggedin
+                        loggedin: data.loggedin,
                     })
+
+
+                    api.get('/api/user')
+                        .then(user => {
+                            this.setState({
+                                userName: user.profile.name,
+                            })
+                        })
+                        .then(() => {
+                            api.get('/api/apps').then(apps => {
+                                console.log(apps)
+                                this.setState({
+                                    apps: apps,
+                                })
+                            })
+                        })
+
+
+
+
                 }
 
-                console.log("Loggedin: ", this.state.loggedin)
+                console.log('Loggedin: ', this.state.loggedin)
             })
         }
     }
 
-
     componentDidMount() {
-
-        api.get('/api/user').then(user => {
-
-            this.setState({
-                userName: user.profile.name
-            })
-        }).then(() => {
-
-            api.get("/api/apps").then(apps => {
-                console.log(apps)
-                this.setState({
-                    apps: apps
-                })
-            })
-        })
 
     }
 
     render() {
-
         if (!this.state.loggedin) {
             return (
                 <BrowserRouter>
@@ -87,13 +87,15 @@ class Application extends React.Component {
                         <h1>Hello {this.state.userName}!</h1>
                         <h2>See your apps:</h2>
                         <UserApps apps={this.state.apps} />
-                        <Route path="/app/:id/items" render={()=>{
-                            return <AppGantt/>
-                        }}/>
+                        <Route
+                            path="/app/:id/items"
+                            render={({match}) => {
+                                return <AppGantt match={match}/>
+                            }}
+                        />
                     </div>
                 </BrowserRouter>
             )
-
         }
     }
 
