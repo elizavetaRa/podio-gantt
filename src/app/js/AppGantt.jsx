@@ -5,9 +5,9 @@ import api from './utils/api'
 import Gantt from '../Gantt';
 import Toolbar from './Toolbar';
 import MessageArea from './MessageArea';
+import './App.css';
 
-
-let data = {
+let theData = {
     data: [
         { id: 1, text: 'Task #1', start_date: '15-04-2017', duration: 3, progress: 0.6 },
         { id: 2, text: 'Task #2', start_date: '18-04-2017', duration: 3, progress: 0.4 }
@@ -25,7 +25,8 @@ class AppGantt extends Component {
         this.state = {
             id: this.props.match.params.id,
             data: [],
-            currentZoom: "Days",
+            secondData: [],
+            currentZoom: "Months",
             messages: []
         }
 
@@ -72,7 +73,7 @@ class AppGantt extends Component {
         api.get(`/api/app/${this.state.id}/items`)
             .then(data => {
 
-
+                console.log("Recieved data: ", data)
                 const newData = data.items.map(proj => {
 
                     let endField = proj.fields.filter(el => {
@@ -97,10 +98,40 @@ class AppGantt extends Component {
                     })
                 })
 
-                console.log("newData", newData)
+                const secondNewData = data.items.map(proj => {
+
+                    let endField = proj.fields.filter(el => {
+                        return el.label == "Deadline"
+                    })
+
+                    let nameField = proj.fields.filter(el => {
+                        return el.label == "Title"
+                    })
+
+                    let tageField = proj.fields.filter(el => {
+                        return el.label == "Tage"
+                    })
+
+                    return ({
+                        id: proj.item_id,
+                        text: nameField[0].values[0].value,
+                        start_date: new Date(new Date(endField[0].values[0].start) - (24 * 60 * 60 * 1000) * tageField[0].values[0].value),
+                        duration: tageField[0].values[0].value,
+                        progress: 0
+                    })
+
+                })
+
+                const secondNewDataParsed = {
+                    data: secondNewData,
+                    links: []
+                }
+
+
 
                 this.setState({
-                    data: newData
+                    data: newData,
+                    secondData: secondNewDataParsed
                 })
             })
 
@@ -110,30 +141,46 @@ class AppGantt extends Component {
 
 
     render() {
-        return (
-            <div>
-                <TimeLine data={this.state.data} mode={"month"} />
 
-                <p>Second Gantt test</p>
+        console.log("Second modified data: ", this.state.secondData)
 
-                <Toolbar
-                    zoom={this.state.currentZoom}
-                    onZoomChange={this.handleZoomChange}
-                />
-                <div className="gantt-container">
-                    <Gantt
-                        tasks={data}
-                        zoom={this.state.currentZoom}
-                        onTaskUpdated={this.logTaskUpdate}
-                        onLinkUpdated={this.logLinkUpdate}
-                    />
+        if (this.state.secondData.length ==0) {
 
-                    <MessageArea
-                        messages={this.state.messages}
-                    />
+            return (
+                <div>
+                    <TimeLine data={this.state.data} mode={"month"} />
+                    <br />
+                    <br />
+
                 </div>
-            </div>
-        );
+            );
+
+
+        } else {
+
+            return (
+                <div>
+                    <TimeLine data={this.state.data} mode={"month"} />
+                    <br />
+                    <br />
+
+                    <Toolbar
+                        zoom={this.state.currentZoom}
+                        onZoomChange={this.handleZoomChange}
+                    />
+                    <div className="gantt-container">
+                        <Gantt
+                            tasks={this.state.secondData}
+                            zoom={this.state.currentZoom}
+                            onTaskUpdated={this.logTaskUpdate}
+                            onLinkUpdated={this.logLinkUpdate}
+                        />
+
+                    </div>
+                </div>
+            );
+        }
+
     }
 }
 

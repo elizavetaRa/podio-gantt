@@ -6,15 +6,23 @@ const UserApps = props => {
     const apps = props.apps
 
     const mappedApps = apps.map(app => {
-        return (
-            <li key={app.app_id}>
-                <Link to={`/app/${app.app_id}/items`}>{app.config.name}</Link>
+
+
+        return (       
+                <li key={app.app_id}>
+                    <div className="appBox">
+                        <Link to={`/app/${app.app_id}/items`}>
+                            <h3>{app.config.name}</h3>
+                            <p>{app.config.description}</p>
+                        </Link>
+                        <a href={`${app.link}`}>See on Podio &rarr;</a>
+                    </div>
                 </li>
         )
     })
 
     return (
-        <div>
+        <div className="apps">
             <ul>{mappedApps}</ul>
         </div>
     );

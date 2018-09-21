@@ -20,7 +20,7 @@ var podio = new PodioJS.api(
 )
 
 function getFullURL(req) {
-    return req.protocol + '://' + req.get('host') + '/'
+    return req.protocol + '://' + req.get('host') + '/app/'
 }
 
 router.use(userMiddleware)

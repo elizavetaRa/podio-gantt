@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import 'dhtmlx-gantt';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
+import "dhtmlx-gantt/codebase/ext/dhtmlxgantt_tooltip"
 
 export default class Gantt extends Component {
   setZoom(value){

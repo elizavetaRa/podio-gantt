@@ -9,6 +9,7 @@ import Navigation from './Navigation'
 import Profile from './Profile'
 import NotFound from './NotFound'
 import api from './utils/api'
+import '../style/index.scss';
 
 import UserApps from './UserApps'
 import AppGantt from './AppGantt'
@@ -75,8 +76,19 @@ class Application extends React.Component {
         if (!this.state.loggedin) {
             return (
                 <BrowserRouter>
-                    <div className="container">
-                        <a href={this.state.authUrl}>Authentication in Podio</a>
+                    <div className="container centered">
+                        <div className="appBox">
+                        
+                        <a href={this.state.authUrl}>
+                        
+                        
+                        <h1>Authentication in Podio &rarr;</h1>
+                        <p>Loggen Sie sich ein über Podio.com</p>
+                        </a>
+                        
+                        
+                        </div>
+
                     </div>
                 </BrowserRouter>
             )
@@ -85,12 +97,21 @@ class Application extends React.Component {
                 <BrowserRouter>
                     <div className="container">
                         <h1>Hello {this.state.userName}!</h1>
+                        <button>Logout</button>
                         <h2>See your apps:</h2>
-                        <UserApps apps={this.state.apps} />
                         <Route
+                            exact
+                            path="/app/"
+                            render={() => {
+                                return <UserApps apps={this.state.apps} />
+                            }}
+                        />
+
+                        <Route
+                            exact
                             path="/app/:id/items"
-                            render={({match}) => {
-                                return <AppGantt match={match}/>
+                            render={({ match }) => {
+                                return <AppGantt match={match} />
                             }}
                         />
                     </div>
