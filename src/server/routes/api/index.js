@@ -162,9 +162,12 @@ router.post('/item/:target_id/:source_id', function(req, res) {
 
 })
 
-router.get('/protected', checkLoggedIn, (req, res) => {
-    
-    res.send({ success: true })
+
+
+router.get('/logout', checkLoggedIn, (req, res) => {
+    console.log("Backend logout")
+    fs.writeFileSync("src/server/tmp/server.json", JSON.stringify({}))
+    res.send("done")
 })
 
 router.use('/auth', authRoutes)

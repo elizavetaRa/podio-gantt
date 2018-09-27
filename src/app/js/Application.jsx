@@ -29,9 +29,13 @@ class Application extends React.Component {
 
         this._setUser = this._setUser.bind(this)
         this._resetUser = this._resetUser.bind(this)
+        this._handleLogout = this._handleLogout.bind(this)
     }
 
     componentWillMount() {
+    }
+    
+    componentDidMount() {
         if (!this.state.loggedin) {
             api.get(`/api${window.location.search}`).then(data => {
                 if (data.authUrl) {
@@ -42,8 +46,8 @@ class Application extends React.Component {
                     this.setState({
                         loggedin: data.loggedin,
                     })
-
-
+    
+    
                     api.get('/api/user')
                         .then(user => {
                             this.setState({
@@ -52,25 +56,29 @@ class Application extends React.Component {
                         })
                         .then(() => {
                             api.get('/api/apps').then(apps => {
-
+    
                                 this.setState({
                                     apps: apps,
                                 })
                             })
                         })
-
-
-
-
+    
+    
+    
+    
                 }
-
-
+    
+    
             })
         }
+
     }
 
-    componentDidMount() {
-
+    _handleLogout(){
+        api.get("api/logout").then(res=>{
+            console.log("logout")
+            window.location = '/'
+        })
     }
 
     render() {
@@ -98,9 +106,8 @@ class Application extends React.Component {
                 <BrowserRouter>
                     <div className="container">
                         <h1>Hello {this.state.userName}!</h1>
-                        <Link className="link nav-link" to="/auth/logout">
-                            <button>Logout</button>
-                        </Link>
+                        <button onClick={this._handleLogout}>Logout</button>
+                        
 
 
                         <Route

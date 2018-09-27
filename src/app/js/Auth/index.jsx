@@ -53,11 +53,6 @@ class Auth extends Component {
                         />
                     )}
                 />
-                <Route
-                    exact
-                    path="/auth/logout"
-                    render={() => <Logout resetUser={this.props.resetUser} />}
-                />
                 <Route component={NotFound} />
             </Switch>
         )

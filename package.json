@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev:app": "parcel watch src/app/index.html",
-        "dev:server": "nodemon --watch src/server src/server/index.js",
+        "dev:server": "nodemon --watch src/server --ignore src/server/tmp/ src/server/index.js",
         "dev": "concurrently -n app,server -c green,blue \"npm run dev:app\" \"npm run dev:server\"",
         "build": "parcel build src/app/index.html --out-dir src/server/public/app --public-url /app",
         "start": "NODE_ENV=production node src/server/index.js",
