@@ -164,7 +164,7 @@ router.post('/item/:target_id/:source_id', function(req, res) {
 
 
 
-router.get('/logout', checkLoggedIn, (req, res) => {
+router.get('/logout', (req, res) => {
     console.log("Backend logout")
     fs.writeFileSync("src/server/tmp/server.json", JSON.stringify({}))
     res.send("done")
