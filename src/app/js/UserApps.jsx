@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 const UserApps = props => {
 
     const apps = props.apps
-
     const mappedApps = apps.map(app => {
 
 
-        return (       
-                <li key={app.app_id}>
+        return (
+            <div key={app.app_id}>
+                
+                <li>
                     <div className="appBox">
                         <Link to={`/app/${app.app_id}/items`}>
                             <h3>{app.config.name}</h3>
@@ -18,11 +19,13 @@ const UserApps = props => {
                         <a href={`${app.link}`}>See on Podio &rarr;</a>
                     </div>
                 </li>
+            </div>
         )
     })
 
     return (
         <div className="apps">
+            <h2>See your apps: </h2>
             <ul>{mappedApps}</ul>
         </div>
     );

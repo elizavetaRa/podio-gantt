@@ -10,6 +10,7 @@ import Profile from './Profile'
 import NotFound from './NotFound'
 import api from './utils/api'
 import '../style/index.scss';
+import Logout from './Auth/Logout'
 
 import UserApps from './UserApps'
 import AppGantt from './AppGantt'
@@ -51,7 +52,7 @@ class Application extends React.Component {
                         })
                         .then(() => {
                             api.get('/api/apps').then(apps => {
-                                console.log(apps)
+
                                 this.setState({
                                     apps: apps,
                                 })
@@ -63,7 +64,7 @@ class Application extends React.Component {
 
                 }
 
-                console.log('Loggedin: ', this.state.loggedin)
+
             })
         }
     }
@@ -78,15 +79,15 @@ class Application extends React.Component {
                 <BrowserRouter>
                     <div className="container centered">
                         <div className="appBox">
-                        
-                        <a href={this.state.authUrl}>
-                        
-                        
-                        <h1>Authentication in Podio &rarr;</h1>
-                        <p>Loggen Sie sich ein über Podio.com</p>
-                        </a>
-                        
-                        
+
+                            <a href={this.state.authUrl}>
+
+
+                                <h1>Authentication in Podio &rarr;</h1>
+                                <p>Loggen Sie sich ein über Podio.com</p>
+                            </a>
+
+
                         </div>
 
                     </div>
@@ -97,8 +98,11 @@ class Application extends React.Component {
                 <BrowserRouter>
                     <div className="container">
                         <h1>Hello {this.state.userName}!</h1>
-                        <button>Logout</button>
-                        <h2>See your apps:</h2>
+                        <Link className="link nav-link" to="/auth/logout">
+                            <button>Logout</button>
+                        </Link>
+
+
                         <Route
                             exact
                             path="/app/"
@@ -111,7 +115,7 @@ class Application extends React.Component {
                             exact
                             path="/app/:id/items"
                             render={({ match }) => {
-                                return <AppGantt match={match} />
+                                return <AppGantt match={match} apps={this.state.apps} />
                             }}
                         />
                     </div>

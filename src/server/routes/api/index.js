@@ -117,6 +117,51 @@ router.get('/app/:id/items', function(req, res) {
         })
 })
 
+//Update Verbindung
+router.post('/item/:target_id/:source_id', function(req, res) {
+    let target = req.params.target_id
+    let source =req.params.source_id
+
+    console.log("TARGET; SOURCE", target, source)
+    
+
+    //find field
+    router.get("/item/${target}").then(item=>{
+
+        let verbindungField = item.fields.filter(el => {
+            return el.label == "Verbindung"
+        })
+
+        
+
+        let fieldId= verbindungField.field_id
+        console.log("VERBINDUNG FIELD ID", fieldId)
+        let requestData = [
+            {
+              "value": source
+            }
+          ]
+
+    podio
+        .isAuthenticated()
+        .then(function() {
+            return podio.request('put', `/item/${id}/value/${fieldId}`, requestData)
+        })
+        .then(function(data) {
+            res.send(data)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+
+
+
+    })
+
+
+
+})
+
 router.get('/protected', checkLoggedIn, (req, res) => {
     
     res.send({ success: true })

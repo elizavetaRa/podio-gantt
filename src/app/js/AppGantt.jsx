@@ -6,60 +6,45 @@ import Gantt from '../Gantt';
 import Toolbar from './Toolbar';
 import MessageArea from './MessageArea';
 import './App.css';
+import { Link } from 'react-router-dom';
 
-let theData = {
-    data: [
-        { id: 1, text: 'Task #1', start_date: '15-04-2017', duration: 3, progress: 0.6 },
-        { id: 2, text: 'Task #2', start_date: '18-04-2017', duration: 3, progress: 0.4 }
-    ],
-    links: [
-        { id: 1, source: 1, target: 2, type: '0' }
-    ]
-};
 
 class AppGantt extends Component {
 
     constructor(props) {
         super(props)
 
+        console.log("Found apps!", props.apps)
         this.state = {
-            id: this.props.match.params.id,
+            id: props.match.params.id,
             data: [],
-            secondData: [],
+
             currentZoom: "Months",
-            messages: []
+            app: []
         }
+
+        
 
         this.handleZoomChange = this.handleZoomChange.bind(this);
         this.logTaskUpdate = this.logTaskUpdate.bind(this);
         this.logLinkUpdate = this.logLinkUpdate.bind(this);
 
-        //this._setUser = this._setUser.bind(this)
     }
 
-    addMessage(message) {
-        var messages = this.state.messages.slice();
-        var prevKey = messages.length ? messages[0].key : 0;
 
-        messages.unshift({ key: prevKey + 1, message });
-        if (messages.length > 40) {
-            messages.pop();
-        }
-        this.setState({ messages });
-    }
-
+    //possible functions for future
     logTaskUpdate(id, mode, task) {
-        let text = task && task.text ? ` (${task.text})` : '';
-        let message = `Task ${mode}: ${id} ${text}`;
-        this.addMessage(message);
+        console.log("Task updated")
     }
 
     logLinkUpdate(id, mode, link) {
-        let message = `Link ${mode}: ${id}`;
+        console.log("Link added", link)
         if (link) {
-            message += ` ( source: ${link.source}, target: ${link.target} )`;
+            api.post(`/api/item/${link.target}/${link.source}`).then(
+                res => { console.log(res) }
+            )
         }
-        this.addMessage(message)
+
     }
 
     handleZoomChange(zoom) {
@@ -70,12 +55,47 @@ class AppGantt extends Component {
 
     componentDidMount() {
 
+        let matchedApp = this.props.apps.filter(app=>{
+            console.log(this.state.id, app.app_id)
+            return this.state.id == app.app_id
+            
+        })
+
+        console.log("MATCHEDAPP", matchedApp)
+
+
+        let mappedApp = (
+            <div>
+                <li>
+                    <div className="appBox">
+                        <Link to={`/app/${matchedApp[0].app_id}/items`}>
+                            <h3>{matchedApp[0].config.name}</h3>
+                            <p>{matchedApp[0].config.description}</p>
+                        </Link>
+                        <a href={`${matchedApp[0].link}`}>See on Podio &rarr;</a>
+                    </div>
+                </li>
+            </div>
+        )
+
+        
+
+        this.setState({
+
+            app: mappedApp
+        })
+
+        console.log("mappedAPP", this.state.app)
+
         api.get(`/api/app/${this.state.id}/items`)
-            .then(data => {
+            .then(res => {
 
-                console.log("Recieved data: ", data)
-                const newData = data.items.map(proj => {
 
+                console.log("Recieved data: ", res)
+
+                const newData = res.items.map(proj => {
+
+                    //format properties
                     let endField = proj.fields.filter(el => {
                         return el.label == "Deadline"
                     })
@@ -88,50 +108,79 @@ class AppGantt extends Component {
                         return el.label == "Tage"
                     })
 
+                    let startDate = new Date(new Date(endField[0].values[0].start) - (24 * 60 * 60 * 1000) * tageField[0].values[0].value)
+                    let startDateText = startDate.getUTCFullYear() + "/" +
+                        ("0" + (startDate.getUTCMonth() + 1)).slice(-2) + "/" +
+                        ("0" + startDate.getUTCDate()).slice(-2) + " " +
+                        ("0" + startDate.getUTCHours()).slice(-2) + ":" +
+                        ("0" + startDate.getUTCMinutes()).slice(-2)
+
+                    let abteilung = proj.fields.filter(el => {
+                        return el.label == "Abteilung"
+                    })
+
+                    let abteilungText = abteilung[0].values[0].value.text
+                    console.log(abteilungText)
+
+                    let responsible = proj.fields.filter(el => {
+                        return el.label == "Responsible"
+                    })
+                    let respString = ""
+                    let arrResponsible = responsible[0].values.forEach(val => {
+                        respString = respString + val.name + " "
+                    })
+                    console.log("RespString: ", respString)
 
                     return ({
-                        id: proj.item_id,
-                        start: new Date(new Date(endField[0].values[0].start) - (24 * 60 * 60 * 1000) * tageField[0].values[0].value),
-                        end: new Date(endField[0].values[0].start),
-                        name: nameField[0].values[0].value,
 
-                    })
-                })
-
-                const secondNewData = data.items.map(proj => {
-
-                    let endField = proj.fields.filter(el => {
-                        return el.label == "Deadline"
-                    })
-
-                    let nameField = proj.fields.filter(el => {
-                        return el.label == "Title"
-                    })
-
-                    let tageField = proj.fields.filter(el => {
-                        return el.label == "Tage"
-                    })
-
-                    return ({
                         id: proj.item_id,
                         text: nameField[0].values[0].value,
                         start_date: new Date(new Date(endField[0].values[0].start) - (24 * 60 * 60 * 1000) * tageField[0].values[0].value),
                         duration: tageField[0].values[0].value,
-                        progress: 0
+                        progress: 0,
+                        start_string: startDateText,
+                        abteilung: abteilungText,
+                        readonly: true
                     })
 
                 })
+                let linkCounter = 0;
+                let newLinks = []
+                res.items.forEach(item => {
 
-                const secondNewDataParsed = {
-                    data: secondNewData,
-                    links: []
+                    let verbindungField = item.fields.filter(el => {
+                        return el.label == "Verbindung"
+                    })
+
+                    if (verbindungField.length > 0) {
+
+                        verbindungField[0].values.forEach(value => {
+                            newLinks.push({
+                                id: linkCounter,
+                                source: item.item_id,
+                                target: value.value.item_id,
+                                type: "2"
+                            })
+
+                            linkCounter++
+                        })
+                    }
+
+
+                })
+
+                console.log("LIIINKS: ", newLinks)
+
+                const newDataParsed = {
+                    data: newData,
+                    links: newLinks
                 }
 
 
 
                 this.setState({
-                    data: newData,
-                    secondData: secondNewDataParsed
+                    data: newDataParsed,
+                    data: newDataParsed
                 })
             })
 
@@ -141,14 +190,17 @@ class AppGantt extends Component {
 
 
     render() {
+        console.log(this.props.apps)
 
-        console.log("Second modified data: ", this.state.secondData)
-
-        if (this.state.secondData.length ==0) {
+        if (this.state.data.length == 0) {
 
             return (
                 <div>
-                    <TimeLine data={this.state.data} mode={"month"} />
+                    <button> Back to the overview</button>
+                    {/*<ul>{mappedApp}</ul>*/}
+
+                    <h2>Wrong format for the gantt chart!</h2>
+                    {/*<TimeLine data={this.state.data} mode={"month"} />*/}
                     <br />
                     <br />
 
@@ -160,17 +212,20 @@ class AppGantt extends Component {
 
             return (
                 <div>
-                    <TimeLine data={this.state.data} mode={"month"} />
+                    {/*<TimeLine data={this.state.data} mode={"month"} />*/}
+                    <Link to={`/app/`}><button> Back to the overview</button></Link>
                     <br />
                     <br />
-
+                    <ul>{this.state.app}</ul>
+                    <br />
+                    <br />
                     <Toolbar
                         zoom={this.state.currentZoom}
                         onZoomChange={this.handleZoomChange}
                     />
                     <div className="gantt-container">
                         <Gantt
-                            tasks={this.state.secondData}
+                            tasks={this.state.data}
                             zoom={this.state.currentZoom}
                             onTaskUpdated={this.logTaskUpdate}
                             onLinkUpdated={this.logLinkUpdate}
