@@ -9,7 +9,7 @@ const UserApps = props => {
 
         return (
             <div key={app.app_id}>
-                
+
                 <li>
                     <div className="appBox">
                         <Link to={`/app/${app.app_id}/items`}>
@@ -24,10 +24,15 @@ const UserApps = props => {
     })
 
     return (
-        <div className="apps">
+
+        <div>
             <h2>See your apps: </h2>
-            <ul>{mappedApps}</ul>
+
+            <div className="apps">
+                <ul>{mappedApps}</ul>
+            </div>
         </div>
+
     );
 };
 

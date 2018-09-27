@@ -23,7 +23,7 @@ class AppGantt extends Component {
             app: []
         }
 
-        
+
 
         this.handleZoomChange = this.handleZoomChange.bind(this);
         this.logTaskUpdate = this.logTaskUpdate.bind(this);
@@ -55,10 +55,10 @@ class AppGantt extends Component {
 
     componentDidMount() {
 
-        let matchedApp = this.props.apps.filter(app=>{
+        let matchedApp = this.props.apps.filter(app => {
             console.log(this.state.id, app.app_id)
             return this.state.id == app.app_id
-            
+
         })
 
         console.log("MATCHEDAPP", matchedApp)
@@ -78,7 +78,7 @@ class AppGantt extends Component {
             </div>
         )
 
-        
+
 
         this.setState({
 
@@ -196,10 +196,12 @@ class AppGantt extends Component {
 
             return (
                 <div>
-                    <button> Back to the overview</button>
+                    <div className="backbutton">
+                        <Link to={`/app/`}><button> Back</button></Link>
+                    </div>
                     {/*<ul>{mappedApp}</ul>*/}
 
-                    <h2>Wrong format for the gantt chart!</h2>
+                    <h2>Wrong format for the gantt chart! Check, if the app has properties "Tage" and "Verbindung".</h2>
                     {/*<TimeLine data={this.state.data} mode={"month"} />*/}
                     <br />
                     <br />
@@ -213,11 +215,11 @@ class AppGantt extends Component {
             return (
                 <div>
                     {/*<TimeLine data={this.state.data} mode={"month"} />*/}
-                    <Link to={`/app/`}><button> Back to the overview</button></Link>
-                    <br />
+                    <div className="backbutton">
+                        <Link to={`/app/`}><button> Back</button></Link>
+                    </div>
                     <br />
                     <ul>{this.state.app}</ul>
-                    <br />
                     <br />
                     <Toolbar
                         zoom={this.state.currentZoom}

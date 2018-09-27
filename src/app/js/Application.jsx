@@ -34,7 +34,7 @@ class Application extends React.Component {
 
     componentWillMount() {
     }
-    
+
     componentDidMount() {
         if (!this.state.loggedin) {
             api.get(`/api${window.location.search}`).then(data => {
@@ -46,8 +46,8 @@ class Application extends React.Component {
                     this.setState({
                         loggedin: data.loggedin,
                     })
-    
-    
+
+
                     api.get('/api/user')
                         .then(user => {
                             this.setState({
@@ -56,26 +56,26 @@ class Application extends React.Component {
                         })
                         .then(() => {
                             api.get('/api/apps').then(apps => {
-    
+
                                 this.setState({
                                     apps: apps,
                                 })
                             })
                         })
-    
-    
-    
-    
+
+
+
+
                 }
-    
-    
+
+
             })
         }
 
     }
 
-    _handleLogout(){
-        api.get("api/logout").then(res=>{
+    _handleLogout() {
+        api.get("api/logout").then(res => {
             console.log("logout")
             window.location = '/'
         })
@@ -86,13 +86,14 @@ class Application extends React.Component {
             return (
                 <BrowserRouter>
                     <div className="container centered">
-                        <div className="appBox">
+                        <div className="appBox container">
 
                             <a href={this.state.authUrl}>
 
-
-                                <h1>Authentication in Podio &rarr;</h1>
-                                <p>Loggen Sie sich ein über Podio.com</p>
+                                <div className="login">
+                                    <h1>Authentication in Podio &rarr;</h1>
+                                    <p>Login with Podio.com account</p>
+                                </div>
                             </a>
 
 
@@ -105,14 +106,24 @@ class Application extends React.Component {
             return (
                 <BrowserRouter>
                     <div className="container">
-                        <h1>Hello {this.state.userName}!</h1>
-                        <button onClick={this._handleLogout}>Logout</button>
-                        
+
+                        <div className="headingline">
+                            <h1>Hello, {this.state.userName}!</h1>
+                            <button onClick={this._handleLogout}>Logout</button>
+                        </div>
 
 
                         <Route
                             exact
-                            path="/app/"
+                            path="/"
+                            render={() => {
+                                return <UserApps apps={this.state.apps} />
+                            }}
+                        />
+
+                        <Route
+                            exact
+                            path="/app"
                             render={() => {
                                 return <UserApps apps={this.state.apps} />
                             }}
