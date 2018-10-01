@@ -8,6 +8,6 @@
 6. You will get an overview of all of your apps. To be displayed as Gantt-chart an app must have at least properties as:
   - "Deadline"
   - "Tage" (german for duration)
-  Additionally Links between the Items in the App can be displayed by set property "Verbindung".
+  - Additionally Links between the Items in the App can be displayed by set property "Verbindung".
 
 
