@@ -19,13 +19,15 @@ gantt.templates.tooltip_text = function (start, end, task) {
     return "<b>Task:</b> " + task.text +
         "<br/><b>Duration:</b> " + task.duration +
         "<br/><b>Startdatum:</b> " + task.start_string +
-        "<br/><b>Abteilung:</b> " + task.abteilung
+        "<br/><b>Abteilung:</b> " + task.abteilung +
+        "<br/><b>Verantwortlich:</b> " + task.responsible
         ;
 };
 
 gantt.config.columns =
     [{ name: "text", label: "Task name", width: "*", tree: true },
     { name: "start_date", label: "Start time", align: "center" },
-    { name: "duration", label: "Duration", align: "center" }];
+    { name: "duration", label: "Duration", align: "center" },
+];
 
 //gantt.config.readonly = true;

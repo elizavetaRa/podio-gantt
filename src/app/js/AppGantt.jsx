@@ -140,6 +140,7 @@ class AppGantt extends Component {
                         progress: 0,
                         start_string: startDateText,
                         abteilung: abteilungText,
+                        responsible: "Elizaveta Ragozina",
                         readonly: true
                     })
 
